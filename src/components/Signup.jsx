@@ -9,10 +9,23 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
+const MotionContainer = motion(Container);
+const MotionButton = motion(Button);
+const MotionInput = motion(Input);
 
 const Signup = () => {
   return (
-    <Container maxW={'container.xl'} h={'100vh'} p={'16'}>
+    <MotionContainer
+      maxW={'container.xl'}
+      h={'100vh'}
+      p={'16'}
+      mb={'40'}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+    >
       <form>
         <VStack
           alignItems={'stretch'}
@@ -20,42 +33,84 @@ const Signup = () => {
           w={['full', '96']}
           m={'auto'}
           my={'16'}
+          p={8}
+          bg="gray.900"
+          rounded={'lg'}
+          shadow="lg"
         >
-          <Heading>VIDEO HUB</Heading>
+          {/* Animated Heading */}
+          <Heading
+            fontSize="4xl"
+            textAlign={'center'}
+            color="blue.500"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7 }}
+          >
+            VIDEO HUB
+          </Heading>
+
+          {/* Avatar */}
           <Avatar alignSelf={'center'} boxSize={'32'} />
 
-          <Input
+          {/* Name Input with Focus Effect */}
+          <MotionInput
             placeholder={'Name'}
             type={'text'}
             required
             focusBorderColor={'purple.500'}
+            initial={{ scale: 1 }}
+            whileFocus={{ scale: 1.05 }}
+            transition="all 0.2s ease"
           />
-          <Input
+
+          {/* Email Input with Focus Effect */}
+          <MotionInput
             placeholder={'Email'}
             type={'email'}
             required
             focusBorderColor={'purple.500'}
+            initial={{ scale: 1 }}
+            whileFocus={{ scale: 1.05 }}
+            transition="all 0.2s ease"
           />
-          <Input
+
+          {/* Password Input with Focus Effect */}
+          <MotionInput
             placeholder={'Password'}
             type={'password'}
             required
             focusBorderColor={'purple.500'}
+            initial={{ scale: 1 }}
+            whileFocus={{ scale: 1.05 }}
+            transition="all 0.2s ease"
           />
 
-          <Button colorScheme={'purple'} type={'submit'}>
+          {/* Sign-Up Button with Hover Animation */}
+          <MotionButton
+            colorScheme={'purple'}
+            type={'submit'}
+            whileHover={{ scale: 1.1 }}
+            transition="all 0.3s ease"
+          >
             Sign Up
-          </Button>
+          </MotionButton>
 
-          <Text textAlign={'right'}>
+          {/* Login Button with Hover Effect */}
+          <Text textAlign={'right'} fontSize={'md'}>
             Already Signed Up?{' '}
-            <Button variant={'link'} colorScheme={'purple'}>
+            <MotionButton
+              variant={'link'}
+              colorScheme={'purple'}
+              whileHover={{ scale: 1.2 }}
+              transition="all 0.3s ease"
+            >
               <Link to={'/login'}>Login In</Link>
-            </Button>
+            </MotionButton>
           </Text>
         </VStack>
       </form>
-    </Container>
+    </MotionContainer>
   );
 };
 
